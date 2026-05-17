@@ -1,0 +1,106 @@
+{
+  "app": {
+    "subtitle": "ניהול חדרי מקווה",
+    "title": "לוח טאבלט",
+    "footerNote": "ניהול חדרים מאובטח לצוות ומנהלים"
+  },
+  "language": {
+    "label": "שפה"
+  },
+  "room": {
+    "title": "מצב החדר",
+    "current": "חדר נוכחי",
+    "number": "חדר {{number}}",
+    "status": {
+      "idle": "ממתין",
+      "ready": "מוכנה",
+      "help": "צריכה עזרה"
+    },
+    "imReady": "אני מוכנה",
+    "needsHelp": "צריכה עזרה",
+    "musicPlaying": "מוזיקה משתנה",
+    "musicPaused": "הפעל מוזיקה",
+    "musicStopped": "מוזיקה הורידה",
+    "tapToPlayMusic": "יש ללחוץ כדי להפעיל מוזיקה",
+    "browserBlocked": "הדפדפן חוסם את הניגון. ניסיון נס אחרים.",
+    "action": {
+      "ready": {
+        "label": "סימן מוכן",
+        "text": "אני מוכנה",
+        "subtitle": "עדכן צוות עכשיו"
+      },
+      "help": {
+        "label": "נזקק לעזרה",
+        "text": "צריכה עזרה",
+        "subtitle": "קרא לעזרה עכשיו"
+      }
+    },
+    "selectPrompt": "בחר חדר",
+    "intro": "הגדר את הסטטוס שלך וקרא לעזרה עם מוזיקת רקע מרגיעה.",
+    "loading": "טוען פרטי חדר...",
+    "socketError": "חיבור בזמן אמת נכשל.",
+    "loadError": "לא ניתן לטעון נתוני חדר.",
+    "updateError": "עדכון סטטוס נכשל.",
+    "updateSuccess": "סטטוס החדר עודכן.",
+    "audioError": "לא ניתן לטעון את האודיו.",
+    "audioBlocked": "נחסם ניגון. גע במסך כדי לאפשר אודיו.",
+    "playError": "לא ניתן להשמיע אודיו.",
+    "music": {
+      "play": "הפעל מוזיקה מרגיעה",
+      "pause": "השהה מוזיקה"
+    },
+    "notFound": "חדר לא נמצא.",
+    "readyNotification": "סטטוס עודכן ל'מוכנה'",
+    "needsHelpNotification": "בקשה לעזרה",
+    "idleNotification": "סטטוס אופס ל'ממתין'",
+    "lastUpdated": "עודכן ב{{time}}"
+  },
+  "dashboard": {
+    "title": "עדכונים בזמן אמת",
+    "subtitle": "לוח צוות",
+    "total": "סה\"כ חדרים",
+    "count": "{{count}} חדרים",
+    "room": "חדר",
+    "updated": "עודכן",
+    "loading": "טוען חדרים...",
+    "socketError": "לא ניתן להתחבר לעדכונים בזמן אמת.",
+    "reset": "טופלה",
+    "resetting": "מאפס...",
+    "resetSuccess": "חדר {{roomNumber}} אופס",
+    "resetError": "ניסיון לאפס נכשל. נסה שוב.",
+    "roomReset": "חדר {{roomNumber}} אופס",
+    "alertReady": "🎵 חדר {{roomNumber}} מוכנה",
+    "alertHelp": "🚨 חדר {{roomNumber}} צריכה עזרה!",
+    "mute": "כבה התרעות קוליות",
+    "unmute": "הפעל התרעות קוליות",
+    "noRooms": "אין חדרים זמינים"
+  },
+  "auth": {
+    "loginTitle": "כניסה",
+    "loginSubtitle": "התחבר כדי לנהל חדרים",
+    "username": "שם משתמש",
+    "password": "סיסמה",
+    "loginButton": "התחבר",
+    "loggingIn": "נכנס..."
+  },
+  "admin": {
+    "title": "ניהול מערכת",
+    "subtitle": "הגדרות מערכת",
+    "roomsCount": "מספר חדרים",
+    "roomsCountHelp": "קבע את מספר החדרים במקווה (1-50)",
+    "save": "שמור שינויים",
+    "saving": "שומר...",
+    "loading": "טוען הגדרות...",
+    "saveError": "שמירה נכשלה. נסה שוב."
+  },
+  "notifications": {
+    "helpActive": "חדר זקוק לעזרה. נדרש תשומת לב צוות.",
+    "roomHelp": "חדר {{roomId}} צריך עזרה כעת.",
+    "roomReady": "חדר {{roomId}} מוכן."
+  },
+  "nav": {
+    "dashboard": "לוח צוות",
+    "admin": "ניהול",
+    "logout": "התנתק"
+  }
+}

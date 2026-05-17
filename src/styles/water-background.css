@@ -1,0 +1,231 @@
+﻿/**
+ * Water Background Styles
+ * ========================
+ * Lightweight animated water background with warm spa tones.
+ * Uses CSS gradients and keyframe animations for premium motion.
+ */
+
+.water-background-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background: #fff7f0;
+}
+
+/* ===== Base Gradient Layer ===== */
+.water-gradient-base {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #fff9f4 0%, #f8e8dd 28%, #f3d8c7 60%, #eed2c0 100%);
+  animation: gradient-shift 10s ease-in-out infinite;
+}
+
+/* ===== Wave Animation Container ===== */
+.water-waves-container {
+  position: absolute;
+  inset: 0;
+  bottom: 0;
+  height: 45%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ===== Floating Bubbles ===== */
+.water-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.05) 70%, transparent 100%);
+  animation: bubble-float linear infinite;
+  will-change: transform, opacity;
+}
+
+.bubble-1 {
+  width: 5px;
+  height: 5px;
+  left: 14%;
+  top: 72%;
+  animation-duration: 9.5s;
+  animation-delay: 0s;
+}
+
+.bubble-2 {
+  width: 7px;
+  height: 7px;
+  left: 28%;
+  top: 60%;
+  animation-duration: 11.5s;
+  animation-delay: 1.8s;
+}
+
+.bubble-3 {
+  width: 4px;
+  height: 4px;
+  left: 53%;
+  top: 78%;
+  animation-duration: 12.5s;
+  animation-delay: 3.2s;
+}
+
+.bubble-4 {
+  width: 6px;
+  height: 6px;
+  left: 76%;
+  top: 70%;
+  animation-duration: 10s;
+  animation-delay: 1.2s;
+}
+
+.bubble-5 {
+  width: 5px;
+  height: 5px;
+  left: 92%;
+  top: 82%;
+  animation-duration: 12s;
+  animation-delay: 2.7s;
+}
+
+/* ===== Individual Wave Layers ===== */
+.water-wave {
+  position: absolute;
+  left: 0;
+  width: 220%;
+  height: 100%;
+  background-repeat: repeat-x;
+  opacity: 0.16;
+  mix-blend-mode: screen;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.water-wave-1 {
+  bottom: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 64' preserveAspectRatio='none'%3E%3Cpath d='M0,18 Q90,0 180,18 T360,18 T540,18 T720,18 T900,18 T1080,18 T1200,18 L1200,64 L0,64 Z' fill='%23f9e4d6' opacity='0.32'/%3E%3C/svg%3E");
+  animation: wave-flow-1 6.5s linear infinite;
+}
+
+.water-wave-2 {
+  bottom: 0px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 64' preserveAspectRatio='none'%3E%3Cpath d='M0,30 Q90,12 180,30 T360,30 T540,30 T720,30 T900,30 T1080,30 T1200,30 L1200,64 L0,64 Z' fill='%23fde6d7' opacity='0.24'/%3E%3C/svg%3E");
+  animation: wave-flow-2 8.5s linear infinite reverse;
+}
+
+.water-wave-3 {
+  bottom: -8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 96' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q100,28 200,50 T400,50 T600,50 T800,50 T1000,50 T1200,50 L1200,96 L0,96 Z' fill='%23ffe9d9' opacity='0.18'/%3E%3C/svg%3E");
+  animation: wave-flow-3 14s linear infinite;
+}
+
+.water-wave-4 {
+  bottom: -14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,64 Q120,38 240,64 T480,64 T720,64 T960,64 T1200,64 L1200,120 L0,120 Z' fill='%23fff1e7' opacity='0.12'/%3E%3C/svg%3E");
+  animation: wave-flow-4 18s linear infinite;
+}
+
+.water-wave-5 {
+  bottom: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath d='M0,22 Q90,2 180,22 T360,22 T540,22 T720,22 T900,22 T1080,22 T1200,22 L1200,80 L0,80 Z' fill='%23fee8dc' opacity='0.16'/%3E%3C/svg%3E");
+  animation: wave-flow-5 9s linear infinite;
+}
+
+.water-wave-6 {
+  bottom: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0,16 Q50,2 100,16 T200,16 T300,16 T400,16 T500,16 T600,16 T700,16 T800,16 T900,16 T1000,16 T1100,16 T1200,16 L1200,60 L0,60 Z' fill='%23fff4e0' opacity='0.2'/%3E%3C/svg%3E");
+  animation: wave-flow-6 5.5s linear infinite reverse;
+}
+
+.water-shimmer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 28%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 50%);
+  animation: shimmer-pulse 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.water-shimmer-2 {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 75% 65%, rgba(255, 250, 240, 0.08) 0%, rgba(255, 250, 240, 0) 45%);
+  animation: shimmer-pulse-2 8s ease-in-out infinite;
+  animation-delay: 3s;
+  pointer-events: none;
+}
+
+@keyframes gradient-shift {
+  0% { background: linear-gradient(180deg, #fff9f4 0%, #f8e8dd 28%, #f3d8c7 60%, #eed2c0 100%); }
+  50% { background: linear-gradient(180deg, #fffaf6 0%, #f9e6d8 28%, #f5d5c2 60%, #efccba 100%); }
+  100% { background: linear-gradient(180deg, #fff9f4 0%, #f8e8dd 28%, #f3d8c7 60%, #eed2c0 100%); }
+}
+
+@keyframes wave-flow-1 { 0% { transform: translateX(0); } 50% { transform: translateX(140px); } 100% { transform: translateX(280px); } }
+@keyframes wave-flow-2 { 0% { transform: translateY(1px) translateX(0); } 50% { transform: translateY(-3px) translateX(-100px); } 100% { transform: translateY(1px) translateX(-200px); } }
+@keyframes wave-flow-3 { 0% { transform: translateX(0) translateY(0); } 33% { transform: translateX(120px) translateY(-4px); } 66% { transform: translateX(240px) translateY(4px); } 100% { transform: translateX(360px) translateY(0); } }
+@keyframes wave-flow-4 { 0% { transform: translateX(0); } 100% { transform: translateX(260px); } }
+@keyframes wave-flow-5 { 0% { transform: translateX(0) translateY(0); } 50% { transform: translateX(180px) translateY(-6px); } 100% { transform: translateX(360px) translateY(0); } }
+@keyframes wave-flow-6 { 0% { transform: translateX(0) translateY(0); } 25% { transform: translateX(-70px) translateY(2px); } 50% { transform: translateX(-140px) translateY(-2px); } 75% { transform: translateX(-210px) translateY(1px); } 100% { transform: translateX(-280px) translateY(0); } }
+
+@keyframes bubble-float { 0% { transform: translateY(100vh) scale(0.8); opacity: 0; } 10% { opacity: 0.65; } 90% { opacity: 0.65; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+@keyframes shimmer-pulse { 0% { opacity: 0.03; } 50% { opacity: 0.08; } 100% { opacity: 0.03; } }
+@keyframes shimmer-pulse-2 { 0% { opacity: 0.02; } 50% { opacity: 0.07; } 100% { opacity: 0.02; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .water-gradient-base,
+  .water-wave,
+  .water-shimmer,
+  .bubble {
+    animation: none !important;
+  }
+}
+
+.water-wave { will-change: transform; transform: translateZ(0); backface-visibility: hidden; perspective: 1000px; }
+.water-shimmer { will-change: opacity; backface-visibility: hidden; }
+
+@media (max-width: 1024px) {
+  .water-wave-1 { animation: wave-flow-1 8.5s linear infinite; opacity: 0.22; }
+  .water-wave-2 { animation: wave-flow-2 10.5s linear infinite reverse; opacity: 0.18; }
+  .water-wave-3 { animation: wave-flow-3 15.5s linear infinite; opacity: 0.14; }
+  .water-wave-4 { animation: wave-flow-4 20s linear infinite; opacity: 0.1; }
+  .water-wave-5 { animation: wave-flow-5 10s linear infinite; opacity: 0.12; }
+  .water-wave-6 { animation: wave-flow-6 8s linear infinite reverse; opacity: 0.08; }
+  .water-gradient-base { animation: gradient-shift 12s ease-in-out infinite; }
+  .water-shimmer { animation: shimmer-pulse 6s ease-in-out infinite; opacity: 0.025; }
+  .water-shimmer-2 { animation: shimmer-pulse-2 8.5s ease-in-out infinite; opacity: 0.02; }
+  .bubble { opacity: 0.28; }
+}
+
+@media (max-width: 640px) {
+  .water-wave-1 { animation: wave-flow-1 10.5s linear infinite; opacity: 0.18; }
+  .water-wave-2 { animation: wave-flow-2 12.5s linear infinite reverse; opacity: 0.14; }
+  .water-wave-3 { animation: wave-flow-3 18s linear infinite; opacity: 0.1; }
+  .water-wave-4 { animation: wave-flow-4 22s linear infinite; opacity: 0.08; }
+  .water-wave-5 { animation: wave-flow-5 12s linear infinite; opacity: 0.08; }
+  .water-wave-6 { animation: wave-flow-6 10s linear infinite reverse; opacity: 0.06; }
+  .water-waves-container { height: 38%; }
+  .bubble { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .water-wave,
+  .water-gradient-base,
+  .water-shimmer,
+  .bubble {
+    animation: none;
+  }
+
+  .water-gradient-base {
+    background: linear-gradient(180deg, #fff9f4 0%, #f8e8dd 28%, #f3d8c7 60%, #eed2c0 100%);
+  }
+
+  .water-wave {
+    opacity: 0.1;
+  }
+}

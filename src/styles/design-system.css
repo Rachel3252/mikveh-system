@@ -1,0 +1,194 @@
+/**
+ * Premium Design System
+ * ====================
+ * Beige, cream, soft pink aesthetic
+ * Tailwind-based with custom premium tweaks
+ */
+
+:root {
+  /* Premium Color Palette */
+  --beige-50: #fffaf6;
+  --beige-100: #fff7f0;
+  --beige-200: #f5e6dd;
+  --beige-300: #ead5c8;
+  --beige-400: #dfc4b3;
+  --cream-50: #fffef9;
+  --cream-100: #fef9f3;
+  
+  /* Soft Pink Palette */
+  --pink-soft-50: #fef6f5;
+  --pink-soft-100: #fae6e2;
+  --pink-soft-200: #f5d6cf;
+  --pink-soft-300: #efbfb5;
+  --pink-soft-400: #e9a89a;
+  
+  /* Shadows */
+  --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-premium: 0 8px 32px rgba(0, 0, 0, 0.12);
+  
+  /* Gradients */
+  --gradient-warm: linear-gradient(135deg, #fef9f3 0%, #f9e4d6 100%);
+  --gradient-luxury: linear-gradient(180deg, #fffaf6 0%, #f5e6dd 100%);
+  --gradient-accent: linear-gradient(135deg, #fae6e2 0%, #f5d6cf 100%);
+}
+
+/* ===== Typography ===== */
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+/* RTL Support for Hebrew */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* ===== Premium Button Styles ===== */
+.btn-premium {
+  @apply rounded-3xl px-8 py-4 font-semibold transition-all duration-200;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-premium:hover {
+  box-shadow: var(--shadow-medium);
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-fuchsia-400 to-pink-400 text-white;
+}
+
+.btn-primary:hover {
+  @apply shadow-lg scale-105;
+}
+
+.btn-primary:active {
+  @apply scale-95;
+}
+
+.btn-secondary {
+  @apply bg-white text-slate-900;
+}
+
+.btn-secondary:hover {
+  @apply bg-slate-50;
+}
+
+.btn-secondary:active {
+  @apply scale-95;
+}
+
+.btn-ghost {
+  @apply bg-transparent text-slate-700 border border-slate-200;
+}
+
+.btn-ghost:hover {
+  @apply bg-slate-50;
+}
+
+/* ===== Glassmorphism Cards ===== */
+.card-glass {
+  @apply rounded-3xl border border-white/20 bg-white/10 backdrop-blur-xl;
+  box-shadow: var(--shadow-soft);
+}
+
+.card-premium {
+  @apply rounded-3xl border border-slate-200/20 bg-gradient-to-br from-white/95 to-slate-50/80 backdrop-blur-sm;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ===== Luxury Gradients ===== */
+.gradient-warm {
+  background: var(--gradient-warm);
+}
+
+.gradient-luxury {
+  background: var(--gradient-luxury);
+}
+
+.gradient-accent {
+  background: var(--gradient-accent);
+}
+
+/* ===== Status Colors - Luxury Theme ===== */
+.status-idle {
+  @apply bg-gradient-to-r from-slate-100 to-slate-50 text-slate-700 border border-slate-200/50;
+}
+
+.status-ready {
+  @apply bg-gradient-to-r from-amber-100 to-amber-50 text-amber-800 border border-amber-200/50;
+}
+
+.status-help {
+  @apply bg-gradient-to-r from-rose-100 to-pink-50 text-rose-800 border border-rose-200/50;
+}
+
+/* ===== Smooth Animations ===== */
+.animate-gentle-float {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Focus States ===== */
+.focus-premium {
+  @apply focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:ring-offset-2 focus:ring-offset-white;
+}
+
+/* ===== Tablet Optimization ===== */
+@media (max-width: 1024px) {
+  .btn-premium {
+    @apply px-6 py-3 text-base;
+  }
+  
+  .card-premium, .card-glass {
+    @apply rounded-2xl;
+  }
+}
+
+/* ===== Accessibility ===== */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gentle-float,
+  .animate-fade-in-scale,
+  .animate-slide-up {
+    animation: none;
+  }
+}

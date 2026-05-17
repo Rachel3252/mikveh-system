@@ -1,0 +1,62 @@
+{
+  "app": {
+    "subtitle": "Gestion des salles de mikvé",
+    "title": "Tableau de bord tablette"
+  },
+  "language": {
+    "label": "Langue"
+  },
+  "room": {
+    "current": "Salle actuelle",
+    "number": "Salle {{number}}",
+    "status": {
+      "idle": "Inactif",
+      "ready": "Prêt",
+      "help": "Aide"
+    },
+    "action": {
+      "ready": {
+        "label": "Prêt",
+        "text": "Je suis prêt",
+        "subtitle": "Notifier le personnel"
+      },
+      "help": {
+        "label": "Besoin d'aide",
+        "text": "J'ai besoin d'aide",
+        "subtitle": "Demander de l'assistance"
+      }
+    },
+    "selectPrompt": "Changer de salle",
+    "intro": "Définissez votre statut et appelez à l'attention avec une musique d'ambiance apaisante.",
+    "audioError": "Impossible de charger l'audio.",
+    "audioBlocked": "Lecture bloquée. Appuyez sur l'écran pour activer l'audio.",
+    "music": {
+      "play": "Jouer de la musique relaxante",
+      "pause": "Mettre la musique en pause"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau du personnel",
+    "subtitle": "Aperçu des statuts en direct",
+    "count": "{{count}} salles",
+    "room": "Salle",
+    "updated": "Mis à jour",
+    "loading": "Chargement des salles...",
+    "socketError": "Impossible de se connecter aux mises à jour en direct.",
+    "reset": "Réinitialiser la salle",
+    "resetting": "Réinitialisation..."
+  },
+  "auth": {
+    "loginTitle": "Connexion",
+    "loginSubtitle": "Accédez à la gestion des salles",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "loginButton": "Se connecter",
+    "loggingIn": "Connexion..."
+  },
+  "notifications": {
+    "helpActive": "Une salle a besoin d'aide. Intervention requise.",
+    "roomHelp": "La salle {{roomId}} a besoin d'aide maintenant.",
+    "roomReady": "La salle {{roomId}} est prête."
+  }
+}

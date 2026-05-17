@@ -1,0 +1,106 @@
+{
+  "app": {
+    "subtitle": "Mikveh Room Management",
+    "title": "Tablet Control Panel",
+    "footerNote": "Secure tenant-aware room control for staff and admins."
+  },
+  "language": {
+    "label": "Language"
+  },
+  "room": {
+    "title": "Room Status",
+    "current": "Current room",
+    "number": "Room {{number}}",
+    "status": {
+      "idle": "Idle",
+      "ready": "Ready",
+      "help": "Help Needed"
+    },
+    "imReady": "I am ready",
+    "needsHelp": "I need help",
+    "musicPlaying": "Music is playing",
+    "musicPaused": "Play music",
+    "musicStopped": "Music paused",
+    "tapToPlayMusic": "Tap to play music",
+    "browserBlocked": "Your browser restricted playback. Try again.",
+    "action": {
+      "ready": {
+        "label": "Ready signal",
+        "text": "I am ready",
+        "subtitle": "Notify staff instantly"
+      },
+      "help": {
+        "label": "Assistance needed",
+        "text": "I need help",
+        "subtitle": "Request support now"
+      }
+    },
+    "selectPrompt": "Switch rooms",
+    "intro": "Set your status and summon attention with calm ambient music.",
+    "loading": "Loading room details...",
+    "socketError": "Real-time connection failed.",
+    "loadError": "Unable to load room data.",
+    "updateError": "Failed to update room status.",
+    "updateSuccess": "Room status updated.",
+    "audioError": "Unable to load audio.",
+    "audioBlocked": "Playback blocked. Tap screen to enable audio.",
+    "playError": "Unable to play audio.",
+    "music": {
+      "play": "Play relaxation music",
+      "pause": "Pause music"
+    },
+    "notFound": "Room not found.",
+    "readyNotification": "Status updated to Ready",
+    "needsHelpNotification": "Help requested",
+    "idleNotification": "Status reset to Idle",
+    "lastUpdated": "Updated at {{time}}"
+  },
+  "dashboard": {
+    "title": "Live Updates",
+    "subtitle": "Staff Dashboard",
+    "total": "Total Rooms",
+    "count": "{{count}} rooms",
+    "room": "Room",
+    "updated": "Updated",
+    "loading": "Loading rooms...",
+    "socketError": "Unable to connect to live updates.",
+    "reset": "Handled",
+    "resetting": "Resetting...",
+    "resetSuccess": "Room {{roomNumber}} has been reset",
+    "resetError": "Failed to reset room. Please try again.",
+    "roomReset": "Room {{roomNumber}} has been reset to idle",
+    "alertReady": "🎵 Room {{roomNumber}} is ready",
+    "alertHelp": "🚨 Room {{roomNumber}} needs help!",
+    "mute": "Mute voice alerts",
+    "unmute": "Unmute voice alerts",
+    "noRooms": "No rooms available"
+  },
+  "admin": {
+    "title": "System administration",
+    "subtitle": "Configure system settings",
+    "roomsCount": "Number of rooms",
+    "roomsCountHelp": "Set the total number of rooms in the mikveh (1-50)",
+    "save": "Save changes",
+    "saving": "Saving...",
+    "loading": "Loading settings...",
+    "saveError": "Failed to save settings. Please try again."
+  },
+  "notifications": {
+    "helpActive": "A room needs help. Staff attention required.",
+    "roomHelp": "Room {{roomId}} needs help now.",
+    "roomReady": "Room {{roomId}} is ready."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "logout": "Logout"
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Access your mikveh control panel",
+    "username": "Username",
+    "password": "Password",
+    "loginButton": "Log in",
+    "loggingIn": "Logging in..."
+  }
+}

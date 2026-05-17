@@ -1,0 +1,1 @@
+const fetch = globalThis.fetch; fetch("http://localhost:3001/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: "admin", password: "admin123" }) }).then(async res => { console.log("status", res.status); console.log(await res.text()); }).catch(err => { console.error("error", err.message); process.exit(1); });

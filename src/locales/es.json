@@ -1,0 +1,62 @@
+{
+  "app": {
+    "subtitle": "Gestión de salas de mikvé",
+    "title": "Panel de control de tablet"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "room": {
+    "current": "Sala actual",
+    "number": "Sala {{number}}",
+    "status": {
+      "idle": "Inactivo",
+      "ready": "Listo",
+      "help": "Ayuda"
+    },
+    "action": {
+      "ready": {
+        "label": "Listo",
+        "text": "Estoy listo",
+        "subtitle": "Notificar al personal"
+      },
+      "help": {
+        "label": "Necesito ayuda",
+        "text": "Necesito ayuda",
+        "subtitle": "Solicitar asistencia"
+      }
+    },
+    "selectPrompt": "Cambiar de sala",
+    "intro": "Ajusta tu estado y solicita atención con música ambiental relajante.",
+    "audioError": "No se puede cargar el audio.",
+    "audioBlocked": "Reproducción bloqueada. Toca la pantalla para habilitar el audio.",
+    "music": {
+      "play": "Reproducir música relajante",
+      "pause": "Pausar música"
+    }
+  },
+  "dashboard": {
+    "title": "Panel del equipo",
+    "subtitle": "Vista de estado en vivo",
+    "count": "{{count}} salas",
+    "room": "Sala",
+    "updated": "Actualizado",
+    "loading": "Cargando salas...",
+    "socketError": "No se puede conectar a las actualizaciones en vivo.",
+    "reset": "Restablecer sala",
+    "resetting": "Restableciendo..."
+  },
+  "auth": {
+    "loginTitle": "Iniciar sesión",
+    "loginSubtitle": "Accede para gestionar salas",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "loginButton": "Entrar",
+    "loggingIn": "Iniciando sesión..."
+  },
+  "notifications": {
+    "helpActive": "Una sala necesita ayuda. Atención requerida.",
+    "roomHelp": "La sala {{roomId}} necesita ayuda ahora.",
+    "roomReady": "La sala {{roomId}} está lista."
+  }
+}
