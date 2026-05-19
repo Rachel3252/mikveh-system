@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ToastProvider } from './components/ToastProvider';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { RoomScreen } from './components/RoomScreen';
 import { DashboardPage } from './pages/DashboardPage';
 import { AdminPage } from './pages/AdminPage';
@@ -126,9 +127,11 @@ export default function App() {
   return (
     <ToastProvider>
       <AuthProvider>
-        <Router>
-          <AppShell />
-        </Router>
+        <ErrorBoundary>
+          <Router>
+            <AppShell />
+          </Router>
+        </ErrorBoundary>
       </AuthProvider>
     </ToastProvider>
   );

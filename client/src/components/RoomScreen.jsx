@@ -7,9 +7,9 @@ import { io } from 'socket.io-client';
 import { toast } from 'sonner';
 import { useAuth } from '../contexts/AuthContext';
 import { WaterBackground } from './WaterBackground';
+import { API_URL, SOCKET_URL } from '../lib/config';
 import '../styles/room-screen.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const MUSIC_URL = '/audio/calm.mp3';
 
 function fadeAudio(audio, targetVolume, duration = 400) {
@@ -90,7 +90,7 @@ export function RoomScreen() {
   useEffect(() => {
     if (!token || Number.isNaN(roomNumber)) return;
 
-    const socket = io(API_URL, {
+    const socket = io(SOCKET_URL, {
       auth: { token },
       autoConnect: false,
     });

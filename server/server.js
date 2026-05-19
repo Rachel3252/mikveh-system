@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
@@ -12,10 +12,20 @@ const { Server } = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
+
+const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || 'http://localhost:5173';
+const SUPABASE_URL = process.env.SUPABASE_URL || '';
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const ALLOWED_ORIGINS = [
+  FRONTEND_URL,
+  'https://mikveh-system.vercel.app',
+].filter(Boolean);
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: ALLOWED_ORIGINS,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
   },
 });
 
@@ -39,8 +49,9 @@ if (!USE_IN_MEMORY_DB) {
   });
 }
 
+app.set('trust proxy', 1);
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }));
+app.use(cors({ origin: ALLOWED_ORIGINS, credentials: true }));
 app.use(express.json());
 
 const apiLimiter = rateLimit({
@@ -314,6 +325,10 @@ function authorizeRoles(...roles) {
 }
 
 app.use('/api/', apiLimiter);
+
+app.get('/', (req, res) => {
+  res.send('Mikveh backend running');
+});
 
 app.post(
   '/api/auth/login',
@@ -763,7 +778,7 @@ async function startServer() {
     if (process.env.INITIAL_ADMIN_USERNAME && process.env.INITIAL_ADMIN_PASSWORD) {
       await seedDefaultTenant();
     }
-    const PORT = process.env.PORT || 3001;
+    const PORT = process.env.PORT || 3000;
     server.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });

@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Settings, Save } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { API_URL } from '../lib/config';
 
 export function Admin({ roomsCount, onRoomsCountChange }) {
   const { t } = useTranslation();

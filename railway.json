@@ -1,0 +1,10 @@
+{
+  "services": [
+    {
+      "name": "backend",
+      "path": "server",
+      "build": "npm install",
+      "start": "npm start"
+    }
+  ]
+}

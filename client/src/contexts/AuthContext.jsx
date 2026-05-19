@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { API_URL } from '../lib/config';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const TOKEN_KEY = 'mikveh_jwt';
 
 const AuthContext = createContext(null);

@@ -6,8 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Dashboard } from '../components/Dashboard';
 import { WaterBackground } from '../components/WaterBackground';
 import { useTranslation } from 'react-i18next';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { API_URL, SOCKET_URL } from '../lib/config';
 
 function getRoomNotification(prevRooms, nextRooms) {
   const previous = prevRooms.reduce((map, room) => {
@@ -103,7 +102,7 @@ export function DashboardPage() {
   useEffect(() => {
     if (!token) return;
 
-    const socket = io(API_URL, {
+    const socket = io(SOCKET_URL, {
       auth: { token },
       autoConnect: false,
     });
