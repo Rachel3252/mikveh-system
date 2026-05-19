@@ -21,20 +21,21 @@ const CORS_ORIGINS = [
 ];
 
 const corsOptions = {
-  origin: CORS_ORIGINS,
+  origin: true,
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
 };
 
 const io = new Server(server, {
   cors: {
-    origin: CORS_ORIGINS,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: true,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   },
 });
+
 
 const DATABASE_URL = process.env.DATABASE_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -57,12 +58,12 @@ if (!USE_IN_MEMORY_DB) {
 }
 
 app.set('trust proxy', 1);
-app.use(express.json());
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+app.use(express.json());
 
 const apiLimiter = rateLimit({
   windowMs: 60 * 1000,
