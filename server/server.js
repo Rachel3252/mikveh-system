@@ -19,13 +19,16 @@ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const ALLOWED_ORIGINS = [
   FRONTEND_URL,
   'https://mikveh-system.vercel.app',
+  'https://mikveh-system-qn8dnaqyc-rachel1753.vercel.app',
+  'http://localhost:5173',
 ].filter(Boolean);
 
 const io = new Server(server, {
   cors: {
     origin: ALLOWED_ORIGINS,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
   },
 });
 
@@ -51,7 +54,14 @@ if (!USE_IN_MEMORY_DB) {
 
 app.set('trust proxy', 1);
 app.use(helmet());
-app.use(cors({ origin: ALLOWED_ORIGINS, credentials: true }));
+app.use(cors({
+  origin: ALLOWED_ORIGINS,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  maxAge: 86400,
+}));
+app.options('*', cors());
 app.use(express.json());
 
 const apiLimiter = rateLimit({
@@ -327,7 +337,7 @@ function authorizeRoles(...roles) {
 app.use('/api/', apiLimiter);
 
 app.get('/', (req, res) => {
-  res.send('Mikveh backend running');
+  res.json({ status: 'Mikveh backend running' });
 });
 
 app.post(
@@ -768,8 +778,10 @@ io.on('connection', async (socket) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err);
-  return res.status(500).json({ error: 'Internal server error.' });
+  console.error('Error:', err);
+  const status = err.status || 500;
+  const message = err.message || 'Internal server error.';
+  return res.status(status).json({ error: message });
 });
 
 async function startServer() {
