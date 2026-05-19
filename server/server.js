@@ -13,39 +13,23 @@ const { Server } = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 
-const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || 'http://localhost:5173';
+const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || 'https://mikveh-system-qn8dnaqyc-rachel1753.vercel.app';
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-const ALLOWED_ORIGINS = [
-  FRONTEND_URL,
-  'https://mikveh-system.vercel.app',
+const CORS_ORIGINS = [
   'https://mikveh-system-qn8dnaqyc-rachel1753.vercel.app',
-  'http://localhost:5173',
-].filter(Boolean);
+];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: CORS_ORIGINS,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
-  maxAge: 86400,
+  credentials: true,
 };
 
 const io = new Server(server, {
   cors: {
-    origin: function (origin, callback) {
-      if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: CORS_ORIGINS,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -73,12 +57,12 @@ if (!USE_IN_MEMORY_DB) {
 }
 
 app.set('trust proxy', 1);
+app.use(express.json());
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
-app.use(express.json());
 
 const apiLimiter = rateLimit({
   windowMs: 60 * 1000,
