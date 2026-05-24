@@ -791,10 +791,11 @@ async function startServer() {
     if (process.env.INITIAL_ADMIN_USERNAME && process.env.INITIAL_ADMIN_PASSWORD) {
       await seedDefaultTenant();
     }
-    const PORT = process.env.PORT || 3000;
-    server.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
   } catch (error) {
     console.error('Failed to start server', error);
     process.exit(1);
