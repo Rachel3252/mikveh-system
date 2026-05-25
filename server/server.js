@@ -787,19 +787,35 @@ app.use((err, req, res, next) => {
 
 async function startServer() {
   try {
-    await ensureSchema();
-    if (process.env.INITIAL_ADMIN_USERNAME && process.env.INITIAL_ADMIN_PASSWORD) {
-      await seedDefaultTenant();
+    if (!USE_IN_MEMORY_DB) {
+      console.log("Connecting DB...");
+
+      await Promise.race([
+        ensureSchema(),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("DB timeout")), 7000)
+        ),
+      ]);
+
+      console.log("Schema ready");
+
+      if (
+        process.env.INITIAL_ADMIN_USERNAME &&
+        process.env.INITIAL_ADMIN_PASSWORD
+      ) {
+        await seedDefaultTenant();
+      }
     }
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-});
   } catch (error) {
-    console.error('Failed to start server', error);
-    process.exit(1);
+    console.error("DB init failed but server continues:", error);
   }
-}
 
+  const PORT = process.env.PORT || 3000;
+
+  server.listen(PORT, "0.0.0.0", () => {
+    console.log("Server running on port", PORT);
+  });
+}
 startServer();
+
+
