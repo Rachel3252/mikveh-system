@@ -8,10 +8,24 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 const { Pool } = require('pg');
-const { Server } = require('socket.io');
+// const { Server } = require('socket.io');
 
 const app = express();
-const server = http.createServer(app);
+
+app.set('trust proxy', 1);
+
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+}));
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
+
+
+app.use(express.json());
+// const server = http.createServer(app);
+const server = app;
 
 const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || 'https://mikveh-system-qn8dnaqyc-rachel1753.vercel.app';
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
@@ -20,21 +34,42 @@ const CORS_ORIGINS = [
   'https://mikveh-system-qn8dnaqyc-rachel1753.vercel.app',
 ];
 
-const corsOptions = {
-  origin: true,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
-const io = new Server(server, {
-  cors: {
-    origin: true,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  },
-});
+const cors = require('cors');
+
+const allowedOrigins = [
+  'https://mikveh-system.vercel.app',
+];
+
+
+app.use(cors({
+  origin: 'https://mikveh-system.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
+
+app.use(express.json());
+// const corsOptions = {
+//   origin(origin, callback) {
+//     if (!origin) return callback(null, true);
+
+//     if (allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     }
+
+//     return callback(null, false);
+//   },
+//   credentials: true,
+// };
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: allowedOrigins,
+//     credentials: true,
+//   },
+// });
 
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -640,14 +675,14 @@ io.use(async (socket, next) => {
   return next(new Error('Authentication required'));
 });
 
-io.on('connection', async (socket) => {
-  const tenantRoom = `mikveh_${socket.mikveh_id}`;
-  try {
-    const rooms = await getRoomsForMikveh(socket.mikveh_id);
-    socket.emit('roomsUpdate', rooms);
-  } catch (error) {
-    console.error('Failed to send initial rooms', error);
-  }
+// io.on('connection', async (socket) => {
+//   const tenantRoom = `mikveh_${socket.mikveh_id}`;
+//   try {
+//     const rooms = await getRoomsForMikveh(socket.mikveh_id);
+//     socket.emit('roomsUpdate', rooms);
+//   } catch (error) {
+//     console.error('Failed to send initial rooms', error);
+//   }
 
   socket.on('updateRoom', async (payload) => {
     try {
@@ -717,25 +752,25 @@ io.on('connection', async (socket) => {
       }
 
       // Broadcast the status change to all clients in the mikveh room
-      io.to(tenantRoom).emit('roomStatusChanged', {
-        roomId: roomNumber,
-        status,
-        timestamp: new Date(),
-      });
+    //   io.to(tenantRoom).emit('roomStatusChanged', {
+    //     roomId: roomNumber,
+    //     status,
+    //     timestamp: new Date(),
+    //   });
 
-      // Also emit roomUpdated for single room subscriptions
-      io.to(tenantRoom).emit('roomUpdated', {
-        id: roomNumber,
-        status,
-        lastUpdated: new Date(),
-      });
+    //   // Also emit roomUpdated for single room subscriptions
+    //   io.to(tenantRoom).emit('roomUpdated', {
+    //     id: roomNumber,
+    //     status,
+    //     lastUpdated: new Date(),
+    //   });
 
-      const rooms = await getRoomsForMikveh(socket.mikveh_id);
-      io.to(tenantRoom).emit('roomsUpdate', rooms);
-    } catch (error) {
-      console.error('Failed to handle room status change', error);
-    }
-  });
+    //   const rooms = await getRoomsForMikveh(socket.mikveh_id);
+    //   io.to(tenantRoom).emit('roomsUpdate', rooms);
+    // } catch (error) {
+    //   console.error('Failed to handle room status change', error);
+    // }
+  // });
 
   socket.on('resetRoom', async (payload) => {
     try {
@@ -776,7 +811,6 @@ io.on('connection', async (socket) => {
   socket.on('disconnect', () => {
     // Client disconnected
   });
-});
 
 app.use((err, req, res, next) => {
   console.error('Error:', err);
@@ -812,10 +846,13 @@ async function startServer() {
 
   const PORT = process.env.PORT || 3000;
 
-  server.listen(PORT, "0.0.0.0", () => {
+  console.log("PORT:", PORT);
+
+//  server.listen(PORT, () => {
+  app.listen(PORT, () => {
     console.log("Server running on port", PORT);
   });
 }
 startServer();
 
-
+    
