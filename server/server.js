@@ -860,11 +860,25 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
+const allowedOrigins = [
+  'https://mikveh-system.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:3000',
+];
+
 app.use(cors({
-  origin: 'https://mikveh-system.vercel.app',
+  origin(origin, callback) {
+    // allow non-browser requests like curl (no origin)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Not allowed by CORS'));
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -891,9 +905,14 @@ app.post('/api/auth/login', (req, res) => {
     username === 'admin@mikveh.com' &&
     password === 'Admin123!'
   ) {
-    return res.json({
-      token: 'test-token',
-    });
+    const JWT_SECRET = process.env.JWT_SECRET || 'dev_jwt_secret';
+    const token = jwt.sign(
+      { userId: 1, mikveh_id: 1, role: 'admin' },
+      JWT_SECRET,
+      { expiresIn: '8h' }
+    );
+
+    return res.json({ token });
   }
 
   return res.status(401).json({
@@ -902,7 +921,73 @@ app.post('/api/auth/login', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+// Create HTTP server and attach Socket.IO so the client socket requests succeed
+const server = http.createServer(app);
 
-app.listen(PORT, () => {
+const io = new Server(server, {
+  cors: {
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('Socket connected', socket.id);
+
+  socket.on('disconnect', (reason) => {
+    console.log('Socket disconnected', socket.id, reason);
+  });
+
+  // Send initial rooms state (empty by default)
+  socket.emit('roomsUpdate', serverState.rooms.map((r) => ({ id: r.roomNumber, status: r.status, lastUpdated: r.lastUpdate })));
+
+  socket.on('resetRoom', ({ roomId }) => {
+    const room = serverState.rooms.find((r) => r.roomNumber === Number(roomId));
+    if (room) {
+      room.status = 'idle';
+      room.lastUpdate = Date.now();
+      io.emit('roomsUpdate', serverState.rooms.map((r) => ({ id: r.roomNumber, status: r.status, lastUpdated: r.lastUpdate })));
+    }
+  });
+});
+
+// Simple in-memory server state for development
+const serverState = {
+  rooms: Array.from({ length: 6 }).map((_, i) => ({ roomNumber: i + 1, status: 'idle', lastUpdate: Date.now() })),
+};
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers.authorization || '';
+  const token = authHeader.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'Authentication token missing.' });
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET || 'dev_jwt_secret');
+    req.user = payload;
+    return next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid token.' });
+  }
+}
+
+app.get('/api/rooms', authenticateToken, (req, res) => {
+  return res.json(serverState.rooms.map((r) => ({ id: r.roomNumber, status: r.status, lastUpdated: r.lastUpdate })));
+});
+
+app.post('/api/rooms/:roomId/reset', authenticateToken, (req, res) => {
+  const roomNumber = Number(req.params.roomId);
+  const room = serverState.rooms.find((r) => r.roomNumber === roomNumber);
+  if (!room) return res.status(404).json({ error: 'Room not found.' });
+  room.status = 'idle';
+  room.lastUpdate = Date.now();
+  io.emit('roomsUpdate', serverState.rooms.map((r) => ({ id: r.roomNumber, status: r.status, lastUpdated: r.lastUpdate })));
+  return res.json({ id: room.roomNumber, status: room.status, lastUpdated: room.lastUpdate });
+});
+
+app.get('/api/config', authenticateToken, (req, res) => {
+  return res.json({ roomsCount: serverState.rooms.length });
+});
+
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
